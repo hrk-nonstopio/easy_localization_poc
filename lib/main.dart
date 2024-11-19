@@ -1,7 +1,19 @@
+import 'package:easy_localization/easy_localization.dart';
+import 'package:easy_localization_poc/extension/locale.dart';
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(const MainApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await EasyLocalization.ensureInitialized();
+
+  runApp(
+    EasyLocalization(
+      supportedLocales: LocaleExt.getSupportedLocales().toList(),
+      path: 'resources/langs',
+      fallbackLocale: LocaleExt.en,
+      child: const MainApp(),
+    ),
+  );
 }
 
 class MainApp extends StatelessWidget {
@@ -9,10 +21,53 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Scaffold(
-        body: Center(
-          child: Text('Hello World!'),
+    return MaterialApp(
+      title: 'Flutter Demo',
+      // title: context.tr('flutter_demo'),
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        useMaterial3: true,
+      ),
+      localizationsDelegates: context.localizationDelegates,
+      supportedLocales: context.supportedLocales,
+      locale: context.locale,
+      // locale: const Locale('mr'),
+      localeListResolutionCallback: (locales, supportedLocales) {
+        print('-> localeListResolutionCallback');
+        return null;
+      },
+      home: const MainHomePage(),
+    );
+  }
+}
+
+class MainHomePage extends StatelessWidget {
+  const MainHomePage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        title: const Text('Flutter Demo Home Page'),
+      ),
+      body: Center(
+        child: Wrap(
+          direction: Axis.vertical,
+          crossAxisAlignment: WrapCrossAlignment.center,
+          spacing: 8,
+          children: <Widget>[
+            Text(
+              context.tr('flutter_demo'),
+            ),
+            for (Locale locale in LocaleExt.getSupportedLocales())
+              FilledButton(
+                child: Text(locale.toString()),
+                onPressed: () {
+                  context.setLocale(locale);
+                },
+              ),
+          ],
         ),
       ),
     );
