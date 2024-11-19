@@ -1,3 +1,3 @@
 # easy_localization_poc
 
-A new Flutter project.
+POC to brainstorm on fetching Localizations on the fly for Sanity projects.
