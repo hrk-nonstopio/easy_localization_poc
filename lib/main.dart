@@ -2,7 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:easy_localization_poc/extension/locale.dart';
 import 'package:flutter/material.dart';
 
-import 'generated/codegen_loader.g.dart';
+import 'l10n/localization_asset_loader.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -13,7 +13,7 @@ void main() async {
       supportedLocales: LocaleExt.getSupportedLocales().toList(),
       path: 'resources/langs',
       fallbackLocale: LocaleExt.en,
-      assetLoader: const CodegenLoader(),
+      assetLoader: const LocalizationAssetLoader(),
       child: const MainApp(),
     ),
   );
@@ -60,9 +60,6 @@ class MainHomePage extends StatelessWidget {
           crossAxisAlignment: WrapCrossAlignment.center,
           spacing: 8,
           children: <Widget>[
-            Text(
-              context.tr('flutter_demo'),
-            ),
             for (Locale locale in LocaleExt.getSupportedLocales())
               FilledButton(
                 child: Text(locale.toString()),
@@ -70,6 +67,7 @@ class MainHomePage extends StatelessWidget {
                   context.setLocale(locale);
                 },
               ),
+            Text(context.tr('hello')),
           ],
         ),
       ),

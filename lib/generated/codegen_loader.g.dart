@@ -15,16 +15,16 @@ class CodegenLoader extends AssetLoader {
   }
 
   static const Map<String, dynamic> mr = {
-    "flutter_demo": "Flutter Demo | mr | code",
+    "hello": "नमस्कार",
   };
   static const Map<String, dynamic> en = {
-    "flutter_demo": "Flutter Demo | en | code",
+    "hello": "Hello",
   };
   static const Map<String, dynamic> hi = {
-    "flutter_demo": "Flutter Demo | hi | code",
+    "hello": "नमस्ते",
   };
   static const Map<String, dynamic> en_US = {
-    "flutter_demo": "Flutter Demo | en-US | code",
+    "hello": "Howdy",
   };
   static const Map<String, Map<String, dynamic>> mapLocales = {
     "mr": mr,
