@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:easy_localization_poc/extension/locale.dart';
 import 'package:flutter/material.dart';
 
+import 'generated/locale_keys.g.dart';
 import 'l10n/localization_asset_loader.dart';
 
 void main() async {
@@ -67,7 +68,7 @@ class MainHomePage extends StatelessWidget {
                   context.setLocale(locale);
                 },
               ),
-            Text(context.tr('hello')),
+            const Text(LocaleKeys.hello).tr(),
           ],
         ),
       ),
